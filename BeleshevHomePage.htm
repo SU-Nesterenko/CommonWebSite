@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Белешев Павел — домашняя страничка</title>
+	<style>
+		:root { --bg: #f4f7f5; --card: #ffffff; --text: #1c2420; --muted: #5a6a62; --accent: #1f8a5b; --line: #e0e7e3; }
+		@media (prefers-color-scheme: dark) {
+			:root { --bg: #131815; --card: #1b221e; --text: #e4ebe7; --muted: #98a89f; --accent: #4fc28d; --line: #2a342e; }
+		}
+		body { margin: 0; background: var(--bg); color: var(--text);
+		       font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+		main { max-width: 760px; margin: 32px auto; padding: 0 16px; }
+		.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+		        padding: 22px 26px; margin-bottom: 18px; }
+		h1 { margin: 0 0 4px; font-size: 28px; line-height: 1.25; }
+		h2 { margin: 0 0 10px; font-size: 19px; }
+		p { margin: 0 0 8px; }
+		.sub { color: var(--muted); margin: 0; }
+		a { color: var(--accent); }
+		ul { margin: 0; padding-left: 20px; }
+		.back { display: inline-block; margin-bottom: 14px; }
+		footer { color: var(--muted); font-size: 14px; text-align: center; padding-bottom: 24px; }
+	</style>
+</head>
+<body>
+<main>
+	<a class="back" href="index.htm">← Общая страничка группы</a>
+
+	<section class="card">
+		<h1>Белешев Павел Олегович</h1>
+		<p class="sub">Студент группы ЭУ-411</p>
+	</section>
+
+	<section class="card">
+		<h2>Обо мне</h2>
+		<!-- ✎ Допишите о себе пару фраз и удалите этот комментарий -->
+		<p>Учусь в группе ЭУ-411. Интересуюсь тем, как устроены программы изнутри и как
+		сделать так, чтобы они не ломались: от модульных тестов до автоматизации проверки интерфейса.</p>
+		<p>Эта страничка — часть общего сайта группы, который мы собираем вместе через Git и GitHub.</p>
+	</section>
+
+	<section class="card">
+		<h2>Что я умею после курса</h2>
+		<ul>
+			<li>автоматизировать проверку веб-форм в Selenium IDE;</li>
+			<li>писать модульные тесты MSTest в Visual Studio;</li>
+			<li>тестировать интерфейс Windows-приложения через Appium;</li>
+			<li>работать с базой данных через NHibernate;</li>
+			<li>вести общий проект в Git: фиксировать, отправлять, сливать и разрешать конфликты.</li>
+		</ul>
+	</section>
+
+	<section class="card">
+		<h2>Увлечения</h2>
+		<!-- ✎ Впишите свои увлечения и удалите этот комментарий -->
+		<ul>
+			<li>компьютерные игры и их устройство;</li>
+			<li>велосипед;</li>
+			<li>кино.</li>
+		</ul>
+	</section>
+
+	<footer>Страница сделана в рамках лабораторной работы №1 «Управление версиями исходного кода. Совместная работа».</footer>
+</main>
+</body>
+</html>
