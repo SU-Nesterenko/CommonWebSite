@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Кравец Максим — домашняя страничка</title>
+	<style>
+		:root { --bg: #f5f6f8; --card: #ffffff; --text: #1d232b; --muted: #5d6875; --accent: #2f6fde; --line: #e2e5ea; }
+		@media (prefers-color-scheme: dark) {
+			:root { --bg: #14171c; --card: #1c2128; --text: #e6e9ee; --muted: #9aa4b1; --accent: #6ea2ff; --line: #2c333c; }
+		}
+		body { margin: 0; background: var(--bg); color: var(--text);
+		       font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+		main { max-width: 760px; margin: 32px auto; padding: 0 16px; }
+		.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+		        padding: 22px 26px; margin-bottom: 18px; }
+		h1 { margin: 0 0 4px; font-size: 28px; line-height: 1.25; }
+		h2 { margin: 0 0 10px; font-size: 19px; }
+		p { margin: 0 0 8px; }
+		.sub { color: var(--muted); margin: 0; }
+		a { color: var(--accent); }
+		ul { margin: 0; padding-left: 20px; }
+		.back { display: inline-block; margin-bottom: 14px; }
+		footer { color: var(--muted); font-size: 14px; text-align: center; padding-bottom: 24px; }
+	</style>
+</head>
+<body>
+<main>
+	<a class="back" href="index.htm">← Общая страничка группы</a>
+
+	<section class="card">
+		<h1>Кравец Максим Андреевич</h1>
+		<p class="sub">Студент группы ЭУ-411</p>
+	</section>
+
+	<section class="card">
+		<h2>Обо мне</h2>
+		<!-- ✎ Допишите о себе пару фраз и удалите этот комментарий -->
+		<p>Учусь в группе ЭУ-411. Больше всего интересуют разработка
+		и тестирование программ: на курсе уже пишу автотесты для веб-форм и Windows-приложений
+		и работаю с базой данных через ORM.</p>
+		<p>Эта страничка — часть общего сайта группы, который мы собираем вместе через Git и GitHub.</p>
+	</section>
+
+	<section class="card">
+		<h2>Что я умею после курса</h2>
+		<ul>
+			<li>Selenium IDE — запись и прогон автотестов веб-форм;</li>
+			<li>модульные тесты MSTest в Visual Studio;</li>
+			<li>UI-тесты Windows-приложения через Appium;</li>
+			<li>NHibernate — объектно-реляционное отображение;</li>
+			<li>Git и GitHub — совместная работа над общим кодом и разрешение конфликтов.</li>
+		</ul>
+	</section>
+
+	<section class="card">
+		<h2>Увлечения</h2>
+		<!-- ✎ Впишите свои увлечения и удалите этот комментарий -->
+		<ul>
+			<li>программирование и небольшие собственные проекты;</li>
+			<li>музыка;</li>
+			<li>спорт.</li>
+		</ul>
+	</section>
+
+	<footer>Страница сделана в рамках лабораторной работы №1 «Управление версиями исходного кода. Совместная работа».</footer>
+</main>
+</body>
+</html>
