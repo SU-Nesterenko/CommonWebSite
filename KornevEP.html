@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Трактир &quot;Адмирал Бен Боу&quot; – Бронирование</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Georgia", "Times New Roman", serif;
+            background: url('images/wood-bg.jpg') repeat;
+            color: #f5e6c8;
+        }
+
+        .tavern-wrapper {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px 30px;
+            background: rgba(35, 20, 10, 0.92);
+            border: 3px solid #8b5a2b;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+        }
+
+        .tavern-title {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #f6d19b;
+            text-shadow: 0 0 8px #000;
+        }
+
+        .tavern-subtitle {
+            text-align: center;
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #e3c799;
+        }
+
+        .tavern-button {
+            background: #5b3110;
+            border: 1px solid #d0aa6b;
+            color: #f5e6c8;
+            padding: 5px 12px;
+            margin: 4px 4px 4px 0;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 3px;
+        }
+
+            .tavern-button:hover {
+                background: #7b4517;
+            }
+
+        .panel {
+            margin-top: 10px;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border: 1px solid #8b5a2b;
+            background: rgba(60, 35, 18, 0.9);
+        }
+
+        .panel-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #f6d19b;
+        }
+
+        .form-row {
+            margin-bottom: 6px;
+        }
+
+        .form-label {
+            display: inline-block;
+            width: 170px;
+        }
+
+        .text-input {
+            width: 220px;
+            padding: 3px 5px;
+            border: 1px solid #c5a46a;
+            background: #2b1a0d;
+            color: #f5e6c8;
+            margin-right: 10px;
+        }
+
+        .text-input-small {
+            width: 120px;
+            padding: 3px 5px;
+            border: 1px solid #c5a46a;
+            background: #2b1a0d;
+            color: #f5e6c8;
+            margin-right: 10px;
+        }
+
+        .tavern-grid {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            margin-bottom: 10px;
+        }
+
+            .tavern-grid th {
+                background: #4a2810;
+                color: #f5e6c8;
+                padding: 6px;
+                border: 1px solid #8b5a2b;
+                text-align: center;
+            }
+
+            .tavern-grid td {
+                padding: 6px;
+                border: 1px solid #8b5a2b;
+                background: rgba(35, 20, 10, 0.95);
+                color: #f5e6c8;
+            }
+
+            .tavern-grid tr:nth-child(even) td {
+                background: rgba(45, 25, 12, 0.95);
+            }
+
+        .calendar-block {
+            display: inline-block;
+            vertical-align: top;
+            margin-right: 20px;
+        }
+
+        .calendar-label {
+            font-weight: bold;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .summary-row {
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="tavern-wrapper">
+            <div class="tavern-title">Трактир &quot;Адмирал Бен Боу&quot;</div>
+            <div class="tavern-subtitle">Новый постоялец и бронирование номера.</div>
+
+            <!-- Данные клиента -->
+            <div class="panel">
+                <div class="panel-title">Данные постояльца</div>
+
+                <div class="form-row">
+                    <span class="form-label">ФИО:</span>
+                    <asp:TextBox ID="TextBox1" runat="server" CssClass="text-input"></asp:TextBox>
+                </div>
+
+                <div class="form-row">
+                    <span class="form-label">Дата рождения (01.01.2000):</span>
+                    <asp:TextBox ID="TextBox2" runat="server" CssClass="text-input-small"></asp:TextBox>
+
+                    <span class="form-label">Телефон (+11111111111):</span>
+                    <asp:TextBox ID="TextBox3" runat="server" CssClass="text-input-small"></asp:TextBox>
+                </div>
+
+                <div class="form-row">
+                    <span class="form-label">Номер паспорта:</span>
+                    <asp:TextBox ID="TextBox4" runat="server" CssClass="text-input-small"></asp:TextBox>
+
+                    <span class="form-label">Серия паспорта:</span>
+                    <asp:TextBox ID="TextBox5" runat="server" CssClass="text-input-small"></asp:TextBox>
+                </div>
+
+                <asp:Button ID="Button1" runat="server" CssClass="tavern-button"
+                            OnClick="Button1_Click" Text="Вход в профиль" Width="163px" />
+            </div>
+
+            <!-- Поиск клиента по ФИО -->
+            <div class="panel">
+                <div class="panel-title">Поиск клиента по ФИО</div>
+                <asp:GridView ID="GridView2" runat="server"
+                              AutoGenerateColumns="False"
+                              DataKeyNames="Id"
+                              DataSourceID="SqlDataSource3"
+                              CssClass="tavern-grid">
+                    <Columns>
+                        <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
+                    </Columns>
+                </asp:GridView>
+            </div>
+
+            <!-- Даты и количество гостей -->
+            <div class="panel">
+                <div class="panel-title">Даты проживания и количество гостей</div>
+
+                <div class="calendar-block">
+                    <span class="calendar-label">Дата заезда:</span>
+                    <asp:Calendar ID="Calendar1" runat="server"
+                                  OnSelectionChanged="Calendar1_SelectionChanged">
+                    </asp:Calendar>
+                </div>
+
+                <div class="calendar-block">
+                    <span class="calendar-label">Дата выезда:</span>
+                    <asp:Calendar ID="Calendar2" runat="server"></asp:Calendar>
+                </div>
+
+                <div class="form-row">
+                    <span class="form-label">Сколько вас:</span>
+                    <asp:TextBox ID="TextBox7" runat="server" CssClass="text-input-small">0</asp:TextBox>
+                </div>
+            </div>
+
+            <!-- Фильтр по номерам -->
+            <div class="panel">
+                <div class="panel-title">Доступные номера</div>
+
+                <div class="form-row">
+                    <asp:Button ID="Button6" runat="server" CssClass="tavern-button"
+                                OnClick="Button6_Click" Text="Фильтр" />
+                    <asp:Button ID="Button5" runat="server" CssClass="tavern-button"
+                                OnClick="Button5_Click" Text="Сбросить" />
+                </div>
+
+                <div class="form-row">
+                    <span class="form-label">Номер:</span>
+                    <asp:TextBox ID="TextBox11" runat="server" CssClass="text-input-small"></asp:TextBox>
+
+                    <span class="form-label">Статус:</span>
+                    <asp:TextBox ID="TextBox12" runat="server" CssClass="text-input-small"></asp:TextBox>
+                </div>
+
+                <div class="form-row">
+                    <span class="form-label">Уровень:</span>
+                    <asp:TextBox ID="TextBox13" runat="server" CssClass="text-input-small"></asp:TextBox>
+
+                    <span class="form-label">Примечание:</span>
+                    <asp:TextBox ID="TextBox14" runat="server" CssClass="text-input-small"></asp:TextBox>
+                </div>
+
+                <asp:GridView ID="GridView1" runat="server"
+                              AutoGenerateColumns="False"
+                              DataKeyNames="Id"
+                              DataSourceID="SqlDataSource1"
+                              OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
+                              AllowSorting="True"
+                              CssClass="tavern-grid">
+                    <Columns>
+                        <asp:CommandField ButtonType="Button" ShowSelectButton="True" />
+                        <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
+                        <asp:BoundField DataField="Номер" HeaderText="Номер" SortExpression="Номер" />
+                        <asp:BoundField DataField="Статус" HeaderText="Статус" SortExpression="Статус" />
+                        <asp:BoundField DataField="Уровень" HeaderText="Уровень" SortExpression="Уровень" />
+                        <asp:BoundField DataField="Число спальных мест" HeaderText="Число спальных мест" SortExpression="Число спальных мест" />
+                        <asp:BoundField DataField="Примечание" HeaderText="Примечание" SortExpression="Примечание" />
+                    </Columns>
+                </asp:GridView>
+            </div>
+
+            <!-- Источники данных и итоговая информация -->
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server"
+                               ConnectionString="<%$ ConnectionStrings:ИндивидуальноеConnectionString %>"
+                               InsertCommand="INSERT INTO Клиенты(ФИО, ДатаРождения, Телефон, [Серия паспорта], [Номер паспорта]) VALUES (@Param1, @Param2, @Param3, @Param4, @Param5)"
+                               SelectCommand="SELECT * FROM [Номера]"
+                               UpdateCommand="UPDATE Номера SET Статус = @Param WHERE (Id = @P)">
+                <InsertParameters>
+                    <asp:ControlParameter ControlID="TextBox1" Name="Param1" PropertyName="Text" />
+                    <asp:ControlParameter ControlID="TextBox2" Name="Param2" PropertyName="Text" />
+                    <asp:ControlParameter ControlID="TextBox3" Name="Param3" PropertyName="Text" />
+                    <asp:ControlParameter ControlID="TextBox4" Name="Param4" PropertyName="Text" />
+                    <asp:ControlParameter ControlID="TextBox5" Name="Param5" PropertyName="Text" />
+                </InsertParameters>
+                <UpdateParameters>
+                    <asp:ControlParameter ControlID="TextBox9" Name="Param" PropertyName="Text" />
+                    <asp:ControlParameter ControlID="TextBox10" Name="P" PropertyName="Text" />
+                </UpdateParameters>
+            </asp:SqlDataSource>
+
+            <asp:SqlDataSource ID="SqlDataSource2" runat="server"
+                               ConnectionString="<%$ ConnectionStrings:ИндивидуальноеConnectionString %>"
+                               InsertCommand="INSERT INTO Записи(id_номера, id_клиента, [Дата въезда], [Дата выезда], Занято) VALUES (@Param2, @Param3, @Param4, @Param5, @Param6)"
+                               SelectCommand="SELECT * FROM [Номера]">
+                <InsertParameters>
+                    <asp:Parameter Name="Param1" />
+                    <asp:ControlParameter ControlID="TextBox8" Name="Param2" PropertyName="Text" />
+                    <asp:ControlParameter ControlID="GridView2" Name="Param3" PropertyName="SelectedValue" />
+                    <asp:ControlParameter ControlID="Calendar1" Name="Param4" PropertyName="SelectedDate" />
+                    <asp:ControlParameter ControlID="Calendar2" Name="Param5" PropertyName="SelectedDate" />
+                    <asp:ControlParameter ControlID="TextBox7" Name="Param6" PropertyName="Text" />
+                </InsertParameters>
+            </asp:SqlDataSource>
+
+            <asp:SqlDataSource ID="SqlDataSource3" runat="server"
+                               ConnectionString="<%$ ConnectionStrings:ИндивидуальноеConnectionString3 %>"
+                               ProviderName="<%$ ConnectionStrings:ИндивидуальноеConnectionString3.ProviderName %>"
+                               SelectCommand="SELECT [Id] FROM [Клиенты] WHERE ([ФИО] = @ФИО)">
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="TextBox1" Name="ФИО" PropertyName="Text" Type="String" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+
+            <div class="panel">
+                <div class="panel-title">Итог по бронированию</div>
+
+                <div class="form-row">
+                    <span class="form-label">Id выбранного номера:</span>
+                    <asp:TextBox ID="TextBox10" runat="server" CssClass="text-input-small"></asp:TextBox>
+
+                    <span class="form-label">Номер комнаты:</span>
+                    <asp:TextBox ID="TextBox8" runat="server" CssClass="text-input-small"></asp:TextBox>
+                </div>
+
+                <div class="summary-row">
+                    <span class="form-label">Будет итогово (статус/сумма и т.п.):</span>
+                    <asp:TextBox ID="TextBox9" runat="server" CssClass="text-input-small"></asp:TextBox>
+                </div>
+
+                <div class="summary-row">
+                    <asp:Button ID="Button4" runat="server" CssClass="tavern-button"
+                                OnClick="Button4_Click" Text="Добавить" />
+                    <asp:Button ID="Button2" runat="server" CssClass="tavern-button"
+                                OnClick="Button2_Click" Text="Отмена" />
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
